@@ -9,7 +9,7 @@ import (
 
 func TestNew(t *testing.T) {
 	is := assert.New(t)
-	id := NewTUID()
+	id := New()
 	idStr := id.String()
 
 	is.Equal(strings.ToUpper(id.prefix), idStr[:len(id.prefix)])

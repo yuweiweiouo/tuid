@@ -26,7 +26,8 @@ func (id TUID) TimeString() string {
 }
 
 func (id TUID) EncodeString() string {
-	weekday := strconv.Itoa(int(id.time.Weekday()) + 1) // avoid zero case
+	weekday := strconv.Itoa(NonZeroWeekday(id.time))
+
 	toEncodeStr := weekday + id.time.Format("150405")
 
 	if id.seq > 0 {
@@ -46,7 +47,7 @@ func (id TUID) String() string {
 	return strings.ToUpper(sb.String())
 }
 
-func NewTUID(opts ...GenOption) TUID {
+func New(opts ...GenOption) TUID {
 	id := TUID{
 		timeLayout: TimeLayoutDefualt,
 		time:       time.Now(),
